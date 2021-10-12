@@ -12,24 +12,25 @@ import { ChamadoService } from 'src/app/services/chamado.service';
 export class ChamadoListComponent implements OnInit {
 
   ELEMENT_DATA: Chamado[] = []
-  FILTRADED_DATA: Chamado[] = []
+  FILTERED_DATA: Chamado[] = []
 
   displayedColumns: string[] =
     ['id', 'titulo', 'cliente', 'tecnico', 'dataAbertura', 'prioridade', 'status', 'actions'];
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private service: ChamadoService) { }
 
   ngOnInit(): void {
-    this.findAll()
+    this.findAll();
   }
 
-  findAll() {
-    this.service.findALl().subscribe(resposta => {
+  findAll(): void {
+    this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta;
-      this.dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator
+      this.dataSource = new MatTableDataSource<Chamado>(resposta);
+      this.dataSource.paginator = this.paginator;
     })
   }
 
@@ -38,38 +39,34 @@ export class ChamadoListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  returnStatus(status: any): string {
-    if (status == 0) {
+  retornaStatus(status: any): string {
+    if(status == '0') {
       return 'ABERTO'
-    }
-    else if (status == 1) {
-      return 'ANDAMENTO'
-    }
-    else {
+    } else if(status == '1') {
+      return 'EM ANDAMENTO'
+    } else {
       return 'ENCERRADO'
     }
   }
 
-  returnPrioridade(prioridade: any): string {
-    if (prioridade == 0) {
+  retornaPrioridade(prioridade: any): string {
+    if(prioridade == '0') {
       return 'BAIXA'
-    }
-    else if (prioridade == 1) {
-      return 'MEDIA'
-    }
-    else {
+    } else if(prioridade == '1') {
+      return 'MÉDIA'
+    } else {
       return 'ALTA'
     }
   }
 
-  orderByStatus(status: any): void {
+  orderByStatus(status: any): void{
     let list: Chamado[] = []
     this.ELEMENT_DATA.forEach(element => {
-      if (element.status == status)
+      if(element.status == status)
         list.push(element)
-    })
-    this.FILTRADED_DATA = list;
+    });
+    this.FILTERED_DATA = list;
     this.dataSource = new MatTableDataSource<Chamado>(list);
-    this.dataSource.paginator = this.paginator
+    this.dataSource.paginator = this.paginator;
   }
 }

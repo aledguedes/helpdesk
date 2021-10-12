@@ -29,7 +29,7 @@ export class ClienteListComponent implements OnInit {
   findAll() {
     this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta
-      this.dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
+      this.dataSource = new MatTableDataSource<Cliente>(resposta);
       this.dataSource.paginator = this.paginator
     })
   }

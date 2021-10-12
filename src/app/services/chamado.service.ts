@@ -10,7 +10,7 @@ export class ChamadoService {
 
   constructor(private http: HttpClient) { }
 
-  findALl() {
+  findAll() {
     return this.http.get<Chamado[]>(`${API_CONFIG.baseUrl}/chamados`)
   }
 }
