@@ -1,19 +1,18 @@
 <div class="container mat-elevation-z8">
-    <h1 class="full-width">Atualizando Chamado</h1>
+    <h1 class="full-width">Relatório Chamado</h1>
     <img class="full-width" src="assets/img/chamado-create.svg" alt="Chamado image">
 
     <form class="form">
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>Título chamado</mat-label>
-            <input [(ngModel)]="chamado.titulo" name="titulo" [formControl]="titulo" required matInput placeholder="Ex. Trocar bateria notebook">
+            <input [disabled]="true" [(ngModel)]="chamado.titulo" name="titulo" matInput placeholder="Ex. Trocar bateria notebook">
         </mat-form-field>
     </form>
 
     <div class="status-prioridade">
         <mat-form-field appearance="outline">
             <mat-label>Status: {{ retornaStatus(chamado.status) }} </mat-label>
-            <mat-select  [formControl]="status" required 
-            [(ngModel)]="chamado.status" name="status">
+            <mat-select [disabled]="true" [(ngModel)]="chamado.status" name="status">
                 <mat-option value="0">ABERTO</mat-option>
                 <mat-option value="1">EM ANDAMENTO</mat-option>
                 <mat-option value="2">ENCERRADO</mat-option>
@@ -22,8 +21,7 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Prioridade: {{ retornaPrioridade(chamado.prioridade) }} </mat-label>
-            <mat-select  [formControl]="prioridade" required 
-            [(ngModel)]="chamado.prioridade" name="prioridade">
+            <mat-select [disabled]="true" [(ngModel)]="chamado.prioridade" name="prioridade">
                 <mat-option value="0">BAIXA</mat-option>
                 <mat-option value="1">MÉDIA</mat-option>
                 <mat-option value="2">ALTA</mat-option>
@@ -34,8 +32,8 @@
     <div class="tecnico">
         <mat-form-field class="full-width" appearance="outline">
             <mat-label> {{ chamado.nomeTecnico }} </mat-label>
-            <mat-select [formControl]="tecnico" required [(ngModel)]="chamado.tecnico" name="titulo">
-                <mat-option *ngFor='let tec of tecList' value="{{ tec.id }}"> {{ tec.nome }} </mat-option>                
+            <mat-select [disabled]="true" [(ngModel)]="chamado.tecnico" name="titulo">
+                <mat-option > {{ chamado.nomeTecnico }} </mat-option>                
             </mat-select>
         </mat-form-field>
     </div>
@@ -43,8 +41,8 @@
     <div class="cliente">
         <mat-form-field class="full-width" appearance="outline">
             <mat-label> {{ chamado.nomeCliente }} </mat-label>
-            <mat-select  [formControl]="cliente" required [(ngModel)]="chamado.cliente" name="cliente">
-                <mat-option *ngFor='let cli of cliList' value="{{ cli.id }}"> {{ cli.nome }} </mat-option>
+            <mat-select [disabled]="true" [(ngModel)]="chamado.cliente" name="cliente">
+                <mat-option> {{ chamado.nomeCliente }} </mat-option>
             </mat-select>
         </mat-form-field>
     </div>
@@ -52,13 +50,11 @@
     <form class="form">      
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Observações</mat-label>
-          <textarea [formControl]="observacoes" required class="observacoes" matInput placeholder="Ex. Trocar bateria de notebook e ver o monitor" [(ngModel)]="chamado.observacoes" name="observacoes"></textarea>
+          <textarea  class="observacoes" matInput [disabled]="true"  [(ngModel)]="chamado.observacoes" name="observacoes"></textarea>
         </mat-form-field>
       </form>
 
-      <button (click)="atualizarChamado()" [disabled]="!validarCampos()" class="full-width mat-elevation-z5" mat-raised-button color="primary">Atualizar</button>
-
-      <button routerLink="../../" class="full-width mat-elevation-z5" mat-stroked-button color="warn">Cancelar</button>
+      <button routerLink="../../" class="full-width mat-elevation-z5" mat-stroked-button color="warn">Voltar</button>
 
       <p class="full-width footer">Desenvolvido por Alexandre Guedes</p>
 </div>
