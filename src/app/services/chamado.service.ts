@@ -10,7 +10,19 @@ export class ChamadoService {
 
   constructor(private http: HttpClient) { }
 
+  findById(id: any){
+    return this.http.get<Chamado>(`${API_CONFIG.baseUrl}/chamados/${id}`)
+  }
+
   findAll() {
     return this.http.get<Chamado[]>(`${API_CONFIG.baseUrl}/chamados`)
+  }
+
+  create(chamado: Chamado) {
+    return this.http.post<Chamado>(`${API_CONFIG.baseUrl}/chamados`,chamado)
+  }
+
+  update(chamado: Chamado) {
+    return this.http.put<Chamado>(`${API_CONFIG.baseUrl}/chamados/${chamado.id}`,chamado)
   }
 }
