@@ -1,7 +1,7 @@
-// export const API_CONFIG = {
-//     baseUrl: 'http://helpdesck.herokuapp.com'
-// }
-
 export const API_CONFIG = {
-    baseUrl: 'http://localhost:8080'
+    baseUrl: 'https://helpdesk-java.herokuapp.com'
 }
+
+// export const API_CONFIG = {
+//     baseUrl: 'http://localhost:8080'
+// }
